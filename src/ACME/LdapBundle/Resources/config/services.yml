@@ -1,0 +1,21 @@
+services:
+  ldap.security.authentication.provider:
+    class:  ACME\LdapBundle\Security\Authentication\Provider\LdapProvider
+    arguments: ["", "%kernel.cache_dir%/security/nonces", @logger]
+
+  ldap.adaptor:
+    class: ACME\LdapBundle\Security\Adaptor\LdapAdaptor
+    arguments: [{ldap_host: %ldap_host%, ldap_dn: "DC=rmit,DC=edu,DC=vn", ldap_user_domain: %ldap_user_domain%, ldap_port: %ldap_port%}, "@logger"]
+    public: false
+
+  ldap.security.authentication.listener:
+    class:  ACME\LdapBundle\Security\Firewall\LdapListener
+    arguments: ["@security.context", "@security.authentication.manager", "@logger", "@ldap.adaptor", "@security.http_utils", "@security.access.decision_manager",'', {}, "@doctrine.orm.entity_manager"]
+
+  ldap.authentication.success_handler:
+    class: ACME\LdapBundle\Security\Handler\AuthenticationSuccessHandler
+    arguments: ["@security.http_utils"]
+
+  ldap.user.provider:
+    class: ACME\LdapBundle\Security\Authentication\Provider\LdapUserProvider
+    arguments: [@doctrine.orm.entity_manager, "ACME\OESBundle\Entity\User", @logger]
