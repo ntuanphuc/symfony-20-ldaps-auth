@@ -1,0 +1,51 @@
+<div class="row-fluid">
+    <div class="span3"><span>&nbsp;</span></div>
+    <div class="span6">
+        <form action="{{ path('login_check') }}" method="post" class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label"></label>
+                <h4>
+                    Enter your ID and password to login
+                </h4>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="username">
+                    Username:
+                </label>
+                <div class="controls">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">
+                    Password:
+                </label>
+                <div class="controls">
+                    <input type="password" id="password" name="_password" />
+                </div>
+            </div>
+            {% if error %}
+                <div class="control-group">
+                    <label class="control-label" for="password">
+
+                    </label>
+                    <div class="controls">
+                        <p class="alert-danger">{{ error.message }}</p>
+                    </div>
+                </div>
+
+            {% endif %}
+            <div class="control-group">
+                <label class="control-label">
+                </label>
+                <div class="controls">
+                    <button type="submit" class="btn btn-danger">Login</button>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+    <div class="span3"><span></span></div>
+</div>

@@ -1,0 +1,4 @@
+RmitLdapBundle:
+    resource: "@ACMELdapBundle/Resources/config/routing.yml"
+    prefix:   /
+    
